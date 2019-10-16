@@ -24,5 +24,5 @@ public class BeerDto {
   private BeerStyleEnum style;
   private Long upc;
   private BigDecimal price;
-  private Integer quantityOnHadn;
+  private Integer quantityOnHand;
 }
