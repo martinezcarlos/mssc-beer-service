@@ -10,7 +10,5 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 class MsscBeerServiceApplicationTests {
 
   @Test
-  void contextLoads() {
-  }
-
+  void contextLoads() {}
 }
