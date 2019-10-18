@@ -1,6 +1,6 @@
 package mart.karle.msscbeerservice.web.controller;
 
-import mart.karle.msscbeerservice.web.command.BeerDto;
+import mart.karle.msscbeerservice.web.command.CustomerDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(BeerController.BASE_URL)
-public class BeerController {
-  static final String BASE_URL = "/api/v1/beers";
+@RequestMapping(CustomerController.BASE_URL)
+public class CustomerController {
+  static final String BASE_URL = "/api/v1/customers";
 
-  @GetMapping("/{beerId}")
-  public ResponseEntity<BeerDto> getBeerById(@PathVariable final UUID beerId) {
-    return ResponseEntity.status(HttpStatus.OK).body(BeerDto.builder().name("Test").build());
+  @GetMapping("/{id}")
+  public ResponseEntity<CustomerDto> getCustomerById(@PathVariable final UUID id) {
+    return ResponseEntity.status(HttpStatus.OK).body(CustomerDto.builder().name("Test").build());
   }
 
   @PostMapping
-  public ResponseEntity<BeerDto> saveNewBeer(@RequestBody final BeerDto beerDto) {
+  public ResponseEntity<CustomerDto> saveNewCustomer(@RequestBody final CustomerDto customerDto) {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @PutMapping("/{beerId}")
-  public ResponseEntity<Void> updateBeer(
-      @PathVariable final UUID beerId, @RequestBody final BeerDto beerDto) {
+  @PutMapping("/{id}")
+  public ResponseEntity<Void> updateCustomer(
+      @PathVariable final UUID id, @RequestBody final CustomerDto customerDto) {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
-  @DeleteMapping("/{beerId}")
-  public ResponseEntity<Void> deleteBeer(@PathVariable final UUID beerId) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteCustomer(@PathVariable final UUID id) {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 }
