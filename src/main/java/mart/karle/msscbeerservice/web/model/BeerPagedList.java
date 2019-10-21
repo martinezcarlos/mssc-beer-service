@@ -1,4 +1,4 @@
-package mart.karle.msscbeerservice.web.command;
+package mart.karle.msscbeerservice.web.model;
 
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

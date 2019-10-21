@@ -1,6 +1,6 @@
 package mart.karle.msscbeerservice.web.controller;
 
-import mart.karle.msscbeerservice.web.command.BeerDto;
+import mart.karle.msscbeerservice.web.model.BeerDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
