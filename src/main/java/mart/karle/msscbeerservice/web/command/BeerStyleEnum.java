@@ -1,4 +1,4 @@
-package mart.karle.msscbeerservice.web.common;
+package mart.karle.msscbeerservice.web.command;
 
 public enum BeerStyleEnum {
   LAGER,
