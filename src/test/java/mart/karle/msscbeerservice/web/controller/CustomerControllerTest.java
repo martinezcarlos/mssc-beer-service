@@ -1,7 +1,7 @@
 package mart.karle.msscbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mart.karle.msscbeerservice.web.model.BeerDto;
+import mart.karle.msscbeerservice.web.model.CustomerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BeerController.class)
-class BeerControllerTest {
+class CustomerControllerTest {
 
   @Autowired private MockMvc mockMvc;
 
@@ -31,7 +31,7 @@ class BeerControllerTest {
   void getBeerById() throws Exception {
     mockMvc
         .perform(
-            get(BeerController.BASE_URL + "/" + UUID.randomUUID())
+            get(CustomerController.BASE_URL + "/" + UUID.randomUUID())
                 .accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk());
@@ -40,13 +40,13 @@ class BeerControllerTest {
   @Test
   void saveNewBeer() throws Exception {
     // Given
-    final BeerDto beerDto = BeerDto.builder().build();
-    final String value = objectMapper.writeValueAsString(beerDto);
+    final CustomerDto customerDto = CustomerDto.builder().build();
+    final String value = objectMapper.writeValueAsString(customerDto);
     // When
     // Then
     mockMvc
         .perform(
-            post(BeerController.BASE_URL + "/new")
+            post(CustomerController.BASE_URL + "/new")
                 .content(value)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -57,13 +57,13 @@ class BeerControllerTest {
   @Test
   void updateBeer() throws Exception {
     // Given
-    final BeerDto beerDto = BeerDto.builder().build();
-    final String value = objectMapper.writeValueAsString(beerDto);
+    final CustomerDto customerDto = CustomerDto.builder().build();
+    final String value = objectMapper.writeValueAsString(customerDto);
     // When
     // Then
     mockMvc
         .perform(
-            put(BeerController.BASE_URL + "/" + UUID.randomUUID())
+            put(CustomerController.BASE_URL + "/" + UUID.randomUUID())
                 .content(value)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))

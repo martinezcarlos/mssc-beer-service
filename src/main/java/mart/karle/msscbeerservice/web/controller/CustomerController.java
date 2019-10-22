@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -24,8 +25,9 @@ public class CustomerController {
     return ResponseEntity.status(HttpStatus.OK).body(CustomerDto.builder().name("Test").build());
   }
 
-  @PostMapping
-  public ResponseEntity<CustomerDto> saveNewCustomer(@RequestBody final CustomerDto customerDto) {
+  @PostMapping("/new")
+  public ResponseEntity<CustomerDto> saveNewCustomer(
+      @Valid @RequestBody final CustomerDto customerDto) {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
