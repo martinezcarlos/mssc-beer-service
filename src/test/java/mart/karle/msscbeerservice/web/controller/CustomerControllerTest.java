@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BeerController.class)
+@WebMvcTest(CustomerController.class)
 class CustomerControllerTest {
 
   @Autowired private MockMvc mockMvc;
@@ -40,7 +40,7 @@ class CustomerControllerTest {
   @Test
   void saveNewBeer() throws Exception {
     // Given
-    final CustomerDto customerDto = CustomerDto.builder().build();
+    final CustomerDto customerDto = CustomerDto.builder().name("Jack").build();
     final String value = objectMapper.writeValueAsString(customerDto);
     // When
     // Then
@@ -57,7 +57,7 @@ class CustomerControllerTest {
   @Test
   void updateBeer() throws Exception {
     // Given
-    final CustomerDto customerDto = CustomerDto.builder().build();
+    final CustomerDto customerDto = CustomerDto.builder().name("Jack").build();
     final String value = objectMapper.writeValueAsString(customerDto);
     // When
     // Then
