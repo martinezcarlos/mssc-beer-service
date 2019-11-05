@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,5 +45,11 @@ public class ControllerExceptionHandler {
   @ExceptionHandler(BindException.class)
   public ResponseEntity<List> bindExceptionHandler(final BindException e) {
     return ResponseEntity.badRequest().body(e.getAllErrors());
+  }
+
+  @ExceptionHandler(NotFoundException.class)
+  public ResponseEntity resourceNotFoundExceptionHandler(final NotFoundException e) {
+    final URI location = null; // TODO: Should I provide a location?
+    return ResponseEntity.notFound().location(location).build();
   }
 }
