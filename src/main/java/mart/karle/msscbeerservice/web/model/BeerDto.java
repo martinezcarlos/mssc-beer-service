@@ -32,10 +32,10 @@ public class BeerDto {
 
   @NotBlank private String name;
   @NotNull private BeerStyleEnum style;
-  @Positive @NotNull private Long upc;
+  @NotNull private String upc;
 
-  @Positive
   @NotNull
+  @Positive
   @JsonFormat(shape = JsonFormat.Shape.STRING)
   private BigDecimal price;
 

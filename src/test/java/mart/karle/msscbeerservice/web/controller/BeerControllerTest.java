@@ -1,6 +1,8 @@
 package mart.karle.msscbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mart.karle.msscbeerservice.service.BeerService;
+import mart.karle.msscbeerservice.web.mapper.BeerMapper;
 import mart.karle.msscbeerservice.web.model.BeerDto;
 import mart.karle.msscbeerservice.web.model.BeerStyleEnum;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
@@ -20,6 +23,8 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
@@ -43,12 +48,17 @@ class BeerControllerTest {
 
   @Autowired private ObjectMapper objectMapper;
 
+  @MockBean private BeerMapper beerMapper;
+  @MockBean private BeerService beerService;
+
   @BeforeEach
   void setUp() {}
 
   @Test
   void getBeerById() throws Exception {
     final ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
+
+    given(beerService.getById(any())).willReturn(buildDto());
 
     mockMvc
         .perform(
@@ -97,6 +107,7 @@ class BeerControllerTest {
   void saveNewBeer() throws Exception {
     // Given
     final String value = objectMapper.writeValueAsString(buildDto());
+    given(beerService.save(any())).willReturn(buildDto());
     // When
     // Then
     final ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
@@ -133,6 +144,7 @@ class BeerControllerTest {
   void updateBeer() throws Exception {
     // Given
     final String value = objectMapper.writeValueAsString(buildDto());
+    given(beerService.getById(any())).willReturn(buildDto());
     // When
     // Then
     mockMvc
@@ -150,7 +162,7 @@ class BeerControllerTest {
         .name("My Beer")
         .style(BeerStyleEnum.ALE)
         .price(BigDecimal.ONE)
-        .upc(123243453L)
+        .upc("123243453")
         .build();
   }
 
