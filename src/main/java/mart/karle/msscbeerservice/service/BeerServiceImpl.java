@@ -6,9 +6,14 @@ import mart.karle.msscbeerservice.repository.BeerRepository;
 import mart.karle.msscbeerservice.web.controller.NotFoundException;
 import mart.karle.msscbeerservice.web.mapper.BeerMapper;
 import mart.karle.msscbeerservice.web.model.BeerDto;
+import mart.karle.msscbeerservice.web.model.BeerPagedList;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +41,36 @@ public class BeerServiceImpl implements BeerService {
     beer.setPrice(beerDto.getPrice());
     beer.setUpc(beerDto.getUpc());
     beerRepository.save(beer);
+  }
+
+  @Override
+  public BeerPagedList listBeers(
+      final String name, final String style, final PageRequest pageRequest) {
+    final BeerPagedList beerPagedList;
+    final Page<Beer> beerPage;
+
+    if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(style)) {
+      // search both
+      beerPage = beerRepository.findAllByNameAndStyle(name, style, pageRequest);
+    } else if (!StringUtils.isEmpty(name) && StringUtils.isEmpty(style)) {
+      // search beer name
+      beerPage = beerRepository.findAllByName(name, pageRequest);
+    } else if (StringUtils.isEmpty(name) && !StringUtils.isEmpty(style)) {
+      // search beer style
+      beerPage = beerRepository.findAllByStyle(style, pageRequest);
+    } else {
+      beerPage = beerRepository.findAll(pageRequest);
+    }
+
+    beerPagedList =
+        new BeerPagedList(
+            beerPage.getContent().stream()
+                .map(beerMapper::entityToDto)
+                .collect(Collectors.toList()),
+            PageRequest.of(
+                beerPage.getPageable().getPageNumber(), beerPage.getPageable().getPageSize()),
+            beerPage.getTotalElements());
+
+    return beerPagedList;
   }
 }

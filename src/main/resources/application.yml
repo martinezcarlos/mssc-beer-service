@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    initialization-mode: embedded
+
+services:
+  inventory:
+    scheme: http
+    host: localhost
+    port: 8082
+    baseContext: api
+    version: v1
+    endpoints:
+      fetchBeerInventory: beers/{beerId}/inventory
+
