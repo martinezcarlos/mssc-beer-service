@@ -38,16 +38,20 @@ public class BeerController {
       @RequestParam(required = false) final Integer pageNumber,
       @RequestParam(required = false) final Integer pageSize,
       @RequestParam(required = false) final String name,
-      @RequestParam(required = false) final String style) {
+      @RequestParam(required = false) final String style,
+      @RequestParam(required = false, defaultValue = "false") final Boolean showInventoryOnHand) {
     final Integer page = pageNumber == null || pageNumber < 0 ? DEFAULT_PAGE_NUMBER : pageNumber;
     final Integer size = pageSize == null || pageSize < 1 ? DEFAULT_PAGE_SIZE : pageSize;
-    final BeerPagedList beerList = beerService.listBeers(name, style, PageRequest.of(page, size));
+    final BeerPagedList beerList =
+        beerService.listBeers(name, style, PageRequest.of(page, size), showInventoryOnHand);
     return ResponseEntity.ok(beerList);
   }
 
   @GetMapping(FIND_BY_ID)
-  public ResponseEntity<BeerDto> getBeerById(@PathVariable final UUID beerId) {
-    return ResponseEntity.ok(beerService.getById(beerId));
+  public ResponseEntity<BeerDto> getBeerById(
+      @PathVariable final UUID beerId,
+      @RequestParam(required = false, defaultValue = "false") final Boolean showInventoryOnHand) {
+    return ResponseEntity.ok(beerService.getById(beerId, showInventoryOnHand));
   }
 
   @PostMapping("/new")

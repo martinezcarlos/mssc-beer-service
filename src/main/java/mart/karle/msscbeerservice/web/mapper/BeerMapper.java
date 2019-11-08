@@ -15,4 +15,7 @@ public interface BeerMapper {
   @Mapping(target = "quantityToBrew", ignore = true)
   @Mapping(target = "minOnHand", ignore = true)
   Beer dtoToEntity(BeerDto dto);
+
+  @Mapping(target = "quantityOnHand", ignore = true)
+  BeerDto entityToDtoWithInventory(Beer beer);
 }

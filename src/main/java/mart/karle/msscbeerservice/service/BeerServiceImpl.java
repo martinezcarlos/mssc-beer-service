@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,8 +24,12 @@ public class BeerServiceImpl implements BeerService {
   private final BeerMapper beerMapper;
 
   @Override
-  public BeerDto getById(final UUID beerId) {
-    return beerMapper.entityToDto(
+  public BeerDto getById(final UUID beerId, final Boolean showInventoryOnHand) {
+    final Function<Beer, BeerDto> mapperFunction =
+        Boolean.TRUE.equals(showInventoryOnHand)
+            ? beerMapper::entityToDtoWithInventory
+            : beerMapper::entityToDto;
+    return mapperFunction.apply(
         beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
   }
 
@@ -45,8 +50,10 @@ public class BeerServiceImpl implements BeerService {
 
   @Override
   public BeerPagedList listBeers(
-      final String name, final String style, final PageRequest pageRequest) {
-    final BeerPagedList beerPagedList;
+      final String name,
+      final String style,
+      final PageRequest pageRequest,
+      final Boolean showInventoryOnHand) {
     final Page<Beer> beerPage;
 
     if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(style)) {
@@ -62,15 +69,15 @@ public class BeerServiceImpl implements BeerService {
       beerPage = beerRepository.findAll(pageRequest);
     }
 
-    beerPagedList =
-        new BeerPagedList(
-            beerPage.getContent().stream()
-                .map(beerMapper::entityToDto)
-                .collect(Collectors.toList()),
-            PageRequest.of(
-                beerPage.getPageable().getPageNumber(), beerPage.getPageable().getPageSize()),
-            beerPage.getTotalElements());
+    final Function<Beer, BeerDto> mapperFunction =
+        Boolean.TRUE.equals(showInventoryOnHand)
+            ? beerMapper::entityToDtoWithInventory
+            : beerMapper::entityToDto;
 
-    return beerPagedList;
+    return new BeerPagedList(
+        beerPage.getContent().stream().map(mapperFunction).collect(Collectors.toList()),
+        PageRequest.of(
+            beerPage.getPageable().getPageNumber(), beerPage.getPageable().getPageSize()),
+        beerPage.getTotalElements());
   }
 }

@@ -24,6 +24,7 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
@@ -58,7 +59,7 @@ class BeerControllerTest {
   void getBeerById() throws Exception {
     final ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
-    given(beerService.getById(any())).willReturn(buildDto());
+    given(beerService.getById(any(), anyBoolean())).willReturn(buildDto());
 
     mockMvc
         .perform(
@@ -144,7 +145,7 @@ class BeerControllerTest {
   void updateBeer() throws Exception {
     // Given
     final String value = objectMapper.writeValueAsString(buildDto());
-    given(beerService.getById(any())).willReturn(buildDto());
+    given(beerService.getById(any(), anyBoolean())).willReturn(buildDto());
     // When
     // Then
     mockMvc
