@@ -2,7 +2,7 @@ package mart.karle.msscbeerservice.service.inventory;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import mart.karle.msscbeerservice.config.InventoryServiceConfig;
+import mart.karle.msscbeerservice.config.service.InventoryServiceConfig;
 import mart.karle.msscbeerservice.service.inventory.model.BeerInventoryDto;
 import mart.karle.msscbeerservice.utils.Constants;
 import org.springframework.core.ParameterizedTypeReference;

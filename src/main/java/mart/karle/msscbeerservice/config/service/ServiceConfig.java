@@ -1,4 +1,4 @@
-package mart.karle.msscbeerservice.config;
+package mart.karle.msscbeerservice.config.service;
 
 import lombok.Setter;
 import org.springframework.util.CollectionUtils;

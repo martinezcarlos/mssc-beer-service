@@ -4,6 +4,9 @@ server:
 spring:
   datasource:
     initialization-mode: embedded
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
 
 services:
   inventory:
