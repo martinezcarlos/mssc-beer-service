@@ -27,7 +27,9 @@ import java.util.UUID;
 @RequestMapping(BeerController.BASE_URL)
 public class BeerController {
   static final String BASE_URL = "/api/v1/beers";
-  private static final String FIND_BY_ID = "/{beerId}";
+  private static final String BY_ID = "/{beerId}";
+  private static final String BY_UPC = "upc/{upc}";
+  private static final String CREATE = "/new";
   private static final Integer DEFAULT_PAGE_NUMBER = 0;
   private static final Integer DEFAULT_PAGE_SIZE = 25;
 
@@ -47,33 +49,36 @@ public class BeerController {
     return ResponseEntity.ok(beerList);
   }
 
-  @GetMapping(FIND_BY_ID)
+  @GetMapping(BY_ID)
   public ResponseEntity<BeerDto> getBeerById(
       @PathVariable final UUID beerId,
       @RequestParam(required = false, defaultValue = "false") final Boolean showInventoryOnHand) {
     return ResponseEntity.ok(beerService.getById(beerId, showInventoryOnHand));
   }
 
-  @PostMapping("/new")
-  public ResponseEntity<BeerDto> saveNewBeer(@Valid @RequestBody final BeerDto beerDto) {
-    final BeerDto savedDto = beerService.save(beerDto);
-    final URI location =
-        UriComponentsBuilder.fromPath(BASE_URL + FIND_BY_ID)
-            .buildAndExpand(savedDto.getId())
-            .toUri();
-    return ResponseEntity.created(location).body(savedDto);
+  @GetMapping(BY_UPC)
+  public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable final String upc) {
+    return ResponseEntity.ok(beerService.getByUpc(upc));
   }
 
-  @PutMapping("/{beerId}")
+  @PostMapping(CREATE)
+  public ResponseEntity<Void> saveNewBeer(@Valid @RequestBody final BeerDto beerDto) {
+    final BeerDto savedDto = beerService.save(beerDto);
+    final URI location =
+        UriComponentsBuilder.fromPath(BASE_URL + BY_ID).buildAndExpand(savedDto.getId()).toUri();
+    return ResponseEntity.created(location).build();
+  }
+
+  @PutMapping(BY_ID)
   public ResponseEntity<Void> updateBeer(
       @PathVariable final UUID beerId, @Valid @RequestBody final BeerDto beerDto) {
     beerService.update(beerId, beerDto);
     final URI location =
-        UriComponentsBuilder.fromPath(BASE_URL + FIND_BY_ID).buildAndExpand(beerId).toUri();
+        UriComponentsBuilder.fromPath(BASE_URL + BY_ID).buildAndExpand(beerId).toUri();
     return ResponseEntity.noContent().location(location).build();
   }
 
-  @DeleteMapping("/{beerId}")
+  @DeleteMapping(BY_ID)
   public ResponseEntity<Void> deleteBeer(@PathVariable final UUID beerId) {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
