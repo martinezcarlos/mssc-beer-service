@@ -2,9 +2,8 @@ package mart.karle.msscbeerservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jms.artemis.ArtemisAutoConfiguration;
 
-@SpringBootApplication(exclude = ArtemisAutoConfiguration.class)
+@SpringBootApplication
 public class BeerServiceApp {
 
   public static void main(final String[] args) {

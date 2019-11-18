@@ -11,6 +11,10 @@ spring:
   h2:
     console:
       enabled: true
+  # defaults for this docker image - vromero/activemq-artemis
+  artemis:
+    user: artemis
+    password: simetraehcapa
 
 services:
   inventory:
