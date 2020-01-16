@@ -16,6 +16,10 @@ spring:
     user: artemis
     password: simetraehcapa
 
+logging:
+  level:
+    mart.karle: debug
+
 services:
   inventory:
     scheme: http
