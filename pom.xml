@@ -1,76 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.github.sfg-beer-works</groupId>
-        <artifactId>sfg-brewery-bom</artifactId>
-        <version>1.0.10</version>
-    </parent>
+  <parent>
+    <groupId>com.github.sfg-beer-works</groupId>
+    <artifactId>sfg-brewery-bom</artifactId>
+    <version>1.0.10</version>
+  </parent>
 
-    <groupId>mart.karle</groupId>
-    <artifactId>mssc-beer-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+  <groupId>mart.karle</groupId>
+  <artifactId>mssc-beer-service</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 
-    <name>mssc-beer-service</name>
+  <name>mssc-beer-service</name>
 
-    <description>MSSC Beer Service</description>
+  <description>MSSC Beer Service</description>
 
-    <properties>
-        <asciidoctor-maven-plugin.version>1.5.8</asciidoctor-maven-plugin.version>
-        <spring-restdocs-asciidoctor.version>2.0.3.RELEASE</spring-restdocs-asciidoctor.version>
-    </properties>
+  <properties>
+    <asciidoctor-maven-plugin.version>1.5.8</asciidoctor-maven-plugin.version>
+    <spring-restdocs-asciidoctor.version>2.0.3.RELEASE</spring-restdocs-asciidoctor.version>
+    <maven-packagecloud-wagon.version>0.0.6</maven-packagecloud-wagon.version>
+    <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
+  </properties>
 
-    <dependencies>
-        <dependency>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.restdocs</groupId>
+      <artifactId>spring-restdocs-mockmvc</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Caching-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.cache</groupId>
+      <artifactId>cache-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>${asciidoctor-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>generate-docs</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <backend>html</backend>
+              <doctype>book</doctype>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
             <groupId>org.springframework.restdocs</groupId>
-            <artifactId>spring-restdocs-mockmvc</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- Caching-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.cache</groupId>
-            <artifactId>cache-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-        </dependency>
-    </dependencies>
+            <artifactId>spring-restdocs-asciidoctor</artifactId>
+            <version>${spring-restdocs-asciidoctor.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>${asciidoctor-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>generate-docs</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <backend>html</backend>
-                            <doctype>book</doctype>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework.restdocs</groupId>
-                        <artifactId>spring-restdocs-asciidoctor</artifactId>
-                        <version>${spring-restdocs-asciidoctor.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${maven-release-plugin.version}</version>
+        <configuration>
+          <scmCommentPrefix>[maven-release-plugin] [skip ci]</scmCommentPrefix>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>io.packagecloud.maven.wagon</groupId>
+        <artifactId>maven-packagecloud-wagon</artifactId>
+        <version>${maven-packagecloud-wagon.version}</version>
+      </extension>
+    </extensions>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>packagecloud.release</id>
+      <url>packagecloud+https://packagecloud.io/karl-mart/dummy</url>
+    </repository>
+    <snapshotRepository>
+      <id>packagecloud.snapshot</id>
+      <url>packagecloud+https://packagecloud.io/karl-mart/dummy</url>
+    </snapshotRepository>
+  </distributionManagement>
 
 </project>
