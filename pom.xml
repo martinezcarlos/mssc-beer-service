@@ -23,6 +23,7 @@
     <spring-restdocs-asciidoctor.version>2.0.3.RELEASE</spring-restdocs-asciidoctor.version>
     <maven-packagecloud-wagon.version>0.0.6</maven-packagecloud-wagon.version>
     <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
+    <project.scm.id>github</project.scm.id>
   </properties>
 
   <dependencies>
@@ -45,6 +46,13 @@
       <artifactId>ehcache</artifactId>
     </dependency>
   </dependencies>
+
+  <scm>
+    <developerConnection>scm:git:https://github.com/martinezcarlos/mssc-beer-service.git
+    </developerConnection>
+    <url>https://github.com/martinezcarlos/mssc-beer-service.git</url>
+    <tag>HEAD</tag>
+  </scm>
 
   <build>
     <plugins>
