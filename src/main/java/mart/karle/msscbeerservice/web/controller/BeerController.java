@@ -1,5 +1,8 @@
 package mart.karle.msscbeerservice.web.controller;
 
+import java.net.URI;
+import java.util.UUID;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mart.karle.msscbeerservice.service.BeerService;
 import mart.karle.msscbeerservice.web.model.BeerDto;
@@ -17,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
