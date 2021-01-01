@@ -1,16 +1,15 @@
 package mart.karle.msscbeerservice.config.service;
 
-import lombok.Setter;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import lombok.Setter;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Setter
 public abstract class ServiceConfig {
@@ -20,6 +19,25 @@ public abstract class ServiceConfig {
   private String baseContext;
   private String version;
   private Map<String, String> endpoints;
+
+  public final URI getUri() {
+    return getUri(null);
+  }
+
+  public final URI getUri(final String endpointName) {
+    return getUri(endpointName, null);
+  }
+
+  public final URI getUri(final String endpointName, final Map<String, Object> uriVariables) {
+    return getUri(endpointName, uriVariables, null);
+  }
+
+  public final URI getUri(
+      final String endpointName,
+      final Map<String, Object> uriVariables,
+      final Map<String, Object> queryParams) {
+    return getUriComponents(endpointName, uriVariables, queryParams).toUri();
+  }
 
   private UriComponents getUriComponents(
       final String endpointName,
@@ -48,30 +66,12 @@ public abstract class ServiceConfig {
     return uriComponentsBuilder.build();
   }
 
-  public final URI getUri(
-      final String endpointName,
-      final Map<String, Object> uriVariables,
-      final Map<String, Object> queryParams) {
-    return getUriComponents(endpointName, uriVariables, queryParams).toUri();
+  public final String getUriString() {
+    return getUriString(null);
   }
 
-  public final URI getUri(final String endpointName, final Map<String, Object> uriVariables) {
-    return getUri(endpointName, uriVariables, null);
-  }
-
-  public final URI getUri(final String endpointName) {
-    return getUri(endpointName, null);
-  }
-
-  public final URI getUri() {
-    return getUri(null);
-  }
-
-  public final String getUriString(
-      final String endpointName,
-      final Map<String, Object> uriVariables,
-      final Map<String, Object> queryParams) {
-    return getUriComponents(endpointName, uriVariables, queryParams).toUriString();
+  public final String getUriString(final String endpointName) {
+    return getUriString(endpointName, null);
   }
 
   public final String getUriString(
@@ -79,11 +79,10 @@ public abstract class ServiceConfig {
     return getUriString(endpointName, uriVariables, null);
   }
 
-  public final String getUriString(final String endpointName) {
-    return getUriString(endpointName, null);
-  }
-
-  public final String getUriString() {
-    return getUriString(null);
+  public final String getUriString(
+      final String endpointName,
+      final Map<String, Object> uriVariables,
+      final Map<String, Object> queryParams) {
+    return getUriComponents(endpointName, uriVariables, queryParams).toUriString();
   }
 }

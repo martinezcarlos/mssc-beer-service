@@ -98,7 +98,8 @@ public class MavenWrapperDownloader {
     }
   }
 
-  private static void downloadFileFromURL(final String urlString, final File destination) throws Exception {
+  private static void downloadFileFromURL(final String urlString, final File destination)
+      throws Exception {
     final URL website = new URL(urlString);
     final ReadableByteChannel rbc;
     rbc = Channels.newChannel(website.openStream());

@@ -33,8 +33,8 @@ public class BrewingService {
     log.debug("Inventory is {}", onHandInventory);
     if (b.getMinOnHand() >= onHandInventory) {
       log.info("Requesting new inventory for beer {}", b.getName());
-      jmsTemplate.convertAndSend(JmsConfig.BREWING_REQUEST_QUEUE,
-          new BrewBeerEvent(beerMapper.entityToDto(b)));
+      jmsTemplate.convertAndSend(
+          JmsConfig.BREWING_REQUEST_QUEUE, new BrewBeerEvent(beerMapper.entityToDto(b)));
     }
   }
 }

@@ -1,16 +1,15 @@
 package mart.karle.msscbeerservice.web.controller;
 
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.ConstraintViolationException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import javax.validation.ConstraintViolationException;
-import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Log4j2
 @ControllerAdvice

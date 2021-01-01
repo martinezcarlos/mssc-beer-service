@@ -1,6 +1,9 @@
 package mart.karle.msscbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.UUID;
 import mart.karle.msscbeerservice.service.BeerService;
 import mart.karle.msscbeerservice.web.mapper.BeerMapper;
 import mart.karle.msscbeerservice.web.model.BeerDto;
@@ -18,10 +21,6 @@ import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
-
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -104,6 +103,15 @@ class BeerControllerTest {
                         .type(Integer.class))));
   }
 
+  private BeerDto buildDto() {
+    return BeerDto.builder()
+        .name("My Beer")
+        .style(BeerStyleEnum.ALE)
+        .price(BigDecimal.ONE)
+        .upc("123243453")
+        .build();
+  }
+
   @Test
   void saveNewBeer() throws Exception {
     // Given
@@ -156,15 +164,6 @@ class BeerControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isNoContent());
-  }
-
-  private BeerDto buildDto() {
-    return BeerDto.builder()
-        .name("My Beer")
-        .style(BeerStyleEnum.ALE)
-        .price(BigDecimal.ONE)
-        .upc("123243453")
-        .build();
   }
 
   private static class ConstrainedFields {

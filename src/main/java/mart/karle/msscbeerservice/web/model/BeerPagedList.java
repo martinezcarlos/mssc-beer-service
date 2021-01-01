@@ -3,12 +3,11 @@ package mart.karle.msscbeerservice.web.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
+import java.io.Serializable;
+import java.util.List;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
-import java.io.Serializable;
-import java.util.List;
 
 public class BeerPagedList extends PageImpl<BeerDto> implements Serializable {
   private static final long serialVersionUID = -2718399308467384233L;

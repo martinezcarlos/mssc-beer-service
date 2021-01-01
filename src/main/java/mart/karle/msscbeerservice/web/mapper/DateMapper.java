@@ -1,11 +1,10 @@
 package mart.karle.msscbeerservice.web.mapper;
 
-import org.springframework.stereotype.Component;
-
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Optional;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DateMapper {

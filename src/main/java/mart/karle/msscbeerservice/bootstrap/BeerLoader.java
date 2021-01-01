@@ -1,5 +1,7 @@
 package mart.karle.msscbeerservice.bootstrap;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import mart.karle.msscbeerservice.domain.Beer;
@@ -7,9 +9,6 @@ import mart.karle.msscbeerservice.repository.BeerRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.util.Arrays;
 
 @Log4j2
 @Component

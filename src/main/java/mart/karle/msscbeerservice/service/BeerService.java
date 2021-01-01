@@ -1,10 +1,9 @@
 package mart.karle.msscbeerservice.service;
 
+import java.util.UUID;
 import mart.karle.msscbeerservice.web.model.BeerDto;
 import mart.karle.msscbeerservice.web.model.BeerPagedList;
 import org.springframework.data.domain.PageRequest;
-
-import java.util.UUID;
 
 public interface BeerService {
   BeerDto getById(UUID beerId, Boolean showInventoryOnHand);
