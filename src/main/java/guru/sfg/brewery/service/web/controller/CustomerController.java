@@ -1,6 +1,6 @@
 package guru.sfg.brewery.service.web.controller;
 
-import guru.sfg.brewery.service.web.model.CustomerDto;
+import guru.sfg.brewery.model.CustomerDto;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package guru.sfg.brewery.service.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import guru.sfg.brewery.service.web.model.CustomerDto;
+import guru.sfg.brewery.model.CustomerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

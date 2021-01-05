@@ -1,7 +1,7 @@
 package guru.sfg.brewery.model.events;
 
 import lombok.NoArgsConstructor;
-import guru.sfg.brewery.service.web.model.BeerDto;
+import guru.sfg.brewery.model.BeerDto;
 
 @NoArgsConstructor
 public class BrewBeerEvent extends BeerEvent {

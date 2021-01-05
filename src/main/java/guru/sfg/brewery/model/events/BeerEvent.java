@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import guru.sfg.brewery.service.web.model.BeerDto;
+import guru.sfg.brewery.model.BeerDto;
 
 @Data
 @Builder

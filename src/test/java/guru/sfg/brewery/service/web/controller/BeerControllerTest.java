@@ -1,10 +1,10 @@
 package guru.sfg.brewery.service.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import guru.sfg.brewery.service.web.model.BeerStyleEnum;
+import guru.sfg.brewery.model.BeerStyleEnum;
 import guru.sfg.brewery.service.service.BeerService;
 import guru.sfg.brewery.service.web.mapper.BeerMapper;
-import guru.sfg.brewery.service.web.model.BeerDto;
+import guru.sfg.brewery.model.BeerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.UUID;
 import javax.validation.Valid;
 
-import guru.sfg.brewery.service.web.model.BeerDto;
-import guru.sfg.brewery.service.web.model.BeerPagedList;
+import guru.sfg.brewery.model.BeerDto;
+import guru.sfg.brewery.model.BeerPagedList;
 import lombok.RequiredArgsConstructor;
 import guru.sfg.brewery.service.service.BeerService;
 

@@ -5,7 +5,7 @@ import guru.sfg.brewery.model.events.NewInventoryEvent;
 import guru.sfg.brewery.service.config.JmsConfig;
 import guru.sfg.brewery.service.domain.Beer;
 import guru.sfg.brewery.service.repository.BeerRepository;
-import guru.sfg.brewery.service.web.model.BeerDto;
+import guru.sfg.brewery.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 

@@ -1,6 +1,6 @@
 package guru.sfg.brewery.service.web.mapper;
 
-import guru.sfg.brewery.service.web.model.BeerDto;
+import guru.sfg.brewery.model.BeerDto;
 import guru.sfg.brewery.service.domain.Beer;
 import guru.sfg.brewery.service.service.inventory.BeerInventoryService;
 

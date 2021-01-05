@@ -1,7 +1,7 @@
 package guru.sfg.brewery.service.service;
 
-import guru.sfg.brewery.service.web.model.BeerDto;
-import guru.sfg.brewery.service.web.model.BeerPagedList;
+import guru.sfg.brewery.model.BeerDto;
+import guru.sfg.brewery.model.BeerPagedList;
 
 import org.springframework.data.domain.PageRequest;
 
