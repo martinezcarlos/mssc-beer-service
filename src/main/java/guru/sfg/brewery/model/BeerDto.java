@@ -1,38 +1,27 @@
 package guru.sfg.brewery.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BeerDto implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class BeerDto extends BaseItem implements Serializable {
   private static final long serialVersionUID = -7110563199250095280L;
-
-  @Null private UUID id;
-  @Null private Integer version;
-
-  @Null
-  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
-  private OffsetDateTime createdDate;
-
-  @Null
-  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
-  private OffsetDateTime lastModifiedDate;
-
   @NotBlank private String name;
   @NotNull private BeerStyleEnum style;
   @NotNull private String upc;
